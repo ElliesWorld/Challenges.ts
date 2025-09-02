@@ -1,18 +1,27 @@
 // Challenge 1
 /*  Create a function addTwo that accepts one input and adds 2 to it. */
 
-// To check if you've completed it, uncomment these console.logs!
-// console.log(addTwo(3));
-// console.log(addTwo(10));
+const addTwo = (num: number): number => {
+    return num + 2;
+};
+
+console.log(addTwo(3));
+console.log(addTwo(10));
+
 
 // ________________________________________________________________________________________________
 // Challenge 2
-/* 
+/*
 Create a function addS that accepts one input and adds an "s" to it.
 */
-// uncomment these to check your work
-//console.log(addS("pizza"));
-//console.log(addS("bagel"));
+
+const addS = (String: string): string => {
+    return String + "s";
+};
+
+console.log(addS("pizza"));
+console.log(addS("bagel"));
+
 
 // ________________________________________________________________________________________________
 // Challenge 3
@@ -22,7 +31,23 @@ Create a function called map that takes two inputs:
 2. A 'callback' function - a function that is applied to each element of the array (inside of the function 'map')
 Have map return a new array filled with numbers that are the result of using the 'callback' function on each element of the input array.
 */
-//console.log(map([1, 2, 3], addTwo));
+
+type callBackFunction = (num: number) => number; 
+
+const map = (arr: number[], callback: callBackFunction): number[] =>
+{
+    const newArr: number[] = [];
+    // Looping through each element of the input array using a for...of loop.
+    for (const item of arr) {
+        // Apply the callback function to the current element.
+        const result = callback(item);
+        newArr.push(result);
+    }
+    
+    return newArr;
+};
+
+console.log(map([1, 2, 3], addTwo));
 
 // ________________________________________________________________________________________________
 // Challenge 4
@@ -30,15 +55,17 @@ Have map return a new array filled with numbers that are the result of using the
 The function forEach takes an array and a callback, and runs the callback on each element of the array. 
 forEach does not return anything.
 */
+
 let alphabet = "";
 const letters = ["a", "b", "c", "d"];
 forEach(letters, function (char) {
   alphabet += char;
 });
+
 console.log(alphabet);
 
 // should output abcd
-*/
+
 
 // ________________________________________________________________________________________________
 // Challenge 5
@@ -55,7 +82,7 @@ The function reduce takes an array and reduces the elements to a single value.
 For example it can sum all the numbers, multiply them, 
 or any operation that you can put into a function.
 */
-
+/*
 const nums = [4, 1, 3];
 const add = function (a, b) {
   return a + b;
@@ -63,11 +90,11 @@ const add = function (a, b) {
 console.log(reduce(nums, add, 0))
 
 //should output 8
-
+/*
 // ________________________________________________________________________________________________
 // Challenge 7
 /* Construct a function intersection that compares input arrays and returns a new array with elements found in all of the inputs. BONUS: Use reduce!
- */
+ *//*
 console.log(
   intersection([5, 10, 15, 20], [15, 88, 1, 5, 7], [1, 10, 15, 5, 20])
 );
@@ -77,7 +104,7 @@ console.log(
 // Challenge 8
 /* 
 Construct a function union that compares input arrays and returns a new array that contains all elements. If there are duplicate elements, only add it once to the new array. Preserve the order of the elements starting from the first element of the first input array. BONUS: Use reduce!
-*/
+*//*
 
 console.log(union([5, 10, 15], [15, 88, 1, 5, 7], [100, 15, 10, 1, 5]));
 // should log: [5, 10, 15, 88, 1, 7, 100]
@@ -90,7 +117,7 @@ objOfMatches will build an object and return it.
 To build the object, objOfMatches will test each element of the first array using the callback to see if the output matches the corresponding element (by index) of the second array. 
 If there is a match, the element from the first array becomes a key in an object, and the element from the second array becomes the corresponding value.
 */
-
+/*
 console.log(
   objOfMatches(
     ["hi", "howdy", "bye", "later", "hello"],
@@ -109,7 +136,7 @@ console.log(
 Construct a function multiMap that will accept two arrays: an array of values and an array of callbacks. 
 multiMap will return an object whose keys match the elements in the array of values. 
 The corresponding values that are assigned to the keys will be arrays consisting of outputs from the array of callbacks, where the input to each callback is the key.
-*/
+*//*
 
 console.log(
   multiMap(
@@ -137,7 +164,7 @@ Construct a function objectFilter that accepts an object as the first parameter 
 objectFilter will return a new object. 
 The new object will contain only the properties from the input object such that the property's value is equal to the property's key passed into the callback.
 */
-
+/*
 const cities = {
   London: "LONDON",
   LA: "Los Angeles",
@@ -153,7 +180,7 @@ console.log(objectFilter(cities, (city) => city.toUpperCase()));
 The callback will return either true or false. majority will iterate through the array and perform the callback on each element until it can be determined if the majority of the return values from the callback are true. 
 If the number of true returns is equal to the number of false returns, majority should return false.
  */
-
+/*
 const isOdd = function (num) {
   return num % 2 === 1;
 };
@@ -166,7 +193,7 @@ console.log(majority([2, 3, 4, 5], isOdd));
 // ________________________________________________________________________________________________
 // Challenge 13
 /* Create a function prioritize that accepts an array and a callback. The callback will return either true or false. prioritize will iterate through the array and perform the callback on each element, and return a new array, where all the elements that yielded a return value of true come first in the array, and the rest of the elements come second. */
-
+/*
 const startsWithS = function (str) {
   return str[0] === "s" || str[0] === "S";
 };
@@ -186,7 +213,7 @@ Create a function countBy that accepts an array and a callback, and returns an o
 countBy will iterate through the array and perform the callback on each element. 
 Each return value from the callback will be saved as a key on the object. 
 The value associated with each key will be the number of times that particular return value was returned.
-*/
+*//*
 
 console.log(
   countBy([1, 2, 3, 4, 5], function (num) {
@@ -203,7 +230,7 @@ groupBy will iterate through the array and perform the callback on each element.
 Each return value from the callback will be saved as a key on the object. 
 The value associated with each key will be an array consisting of all the elements that resulted in that return value when passed into the callback.
 */
-
+/*
 const decimals = [1.3, 2.1, 2.4];
 const floored = function (num) {
   return Math.floor(num);
@@ -220,7 +247,7 @@ The callback will return either true or false.
 goodKeys will iterate through the object and perform the callback on each value. 
 goodKeys will then return an array consisting only the keys whose associated values yielded a true return value from the callback.
 */
-
+/*
 const sunny = {
   mac: "priest",
   dennis: "calculating",
@@ -244,7 +271,7 @@ and then passing the resulting output into the second function,
 yields the same output as the same operation with the order of the functions reversed (passing the value into the second function, 
 and then passing the output into the first function).
 */
-
+/*
 const multBy3 = (n) => n * 3;
 const divBy4 = (n) => n / 4;
 const subtract5 = (n) => n - 5;
@@ -265,7 +292,7 @@ objFilter should make a new object, and then iterate through the passed-in objec
 using each key as input for the callback. If the output from the callback is equal to the corresponding value, 
 then that key-value pair is copied into the new object. objFilter will return this new object.
 */
-
+/*
 const startingObj = {};
 startingObj[6] = 3;
 startingObj[2] = 1;
@@ -281,7 +308,7 @@ Create a function rating that accepts an array (of functions) and a value.
 All the functions in the array will return true or false. 
 rating should return the percentage of functions from the array that return true when the value is used as input.
 */
-
+/*
 const isEven = (n) => n % 2 === 0;
 const greaterThanFour = (n) => n > 4;
 const isSquare = (n) => Math.sqrt(n) % 1 === 0;
@@ -303,7 +330,7 @@ and then use the output from that function as input for the third function,
 and so forth, until we have an output from the last function in the array. 
 pipe should return the final output.
 */
-
+/*
 const capitalize = (str) => str.toUpperCase();
 const addLowerCase = (str) => str + str.toLowerCase();
 const repeat = (str) => str + str;
@@ -319,7 +346,7 @@ and a subject (which is any value). highestFunc should return the key of the obj
 whose associated value (which will be a function) returns the largest number, 
 when the subject is given as input.
 */
-
+/*
 const groupOfFuncs = {};
 groupOfFuncs.double = (n) => n * 2;
 groupOfFuncs.addTen = (n) => n + 10;
@@ -342,7 +369,7 @@ combineOperations should pass the value returned by the first function into the 
 and so on until every function in the array has been called. combineOperations should return the final value 
 returned by the last function in the array.
 */
-
+/*
 function add100(num) {
   return num + 100;
 }
@@ -376,7 +403,7 @@ myFunc should pass each element from the array (in order) into the callback.
 If the callback returns true, myFunc should return the index of the current element. 
 If the callback never returns true, myFunc should return -1;
 */
-
+/*
 const numbers = [2, 3, 6, 64, 10, 8, 12];
 const evens = [2, 4, 6, 8, 10, 12, 64];
 
@@ -396,7 +423,7 @@ Your function should pass each element of the array (in order) into the callback
 The behavior of this function should mirror the functionality of the native .forEach() 
 JavaScript array method as closely as possible.
  */
-
+/*
 let sum = 0;
 
 function addToSum(num) {
@@ -408,4 +435,4 @@ myForEach(nums2, addToSum);
 console.log(sum);
 // Should output 6
 @ElliesWorld
-Comment
+Comment */
