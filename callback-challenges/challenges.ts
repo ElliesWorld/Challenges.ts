@@ -62,11 +62,11 @@ console.log(map([1, 2, 3], addTwo));
 The function forEach takes an array and a callback, and runs the callback on each element of the array. 
 forEach does not return anything.
 */
-type callbackType = (char: any) => void;
+type callbackType<T> = (element: T) => void; // Changed to generic T parameter to compile all challenges at once
 
-const forEach = (array: string[], callback: callbackType) => {
+const forEach = <T>(array: T[], callback: callbackType<T>) => {
   for (let i = 0; i < array.length; i++) {
-    callback(array[i]);
+    callback(array[i]!);  // ! is telling typescript that it is not undefined
   }
 };
 
@@ -77,17 +77,33 @@ forEach(letters, function (char) {
 });
 
 console.log(alphabet);
-
 // should output abcd
-
 
 // ________________________________________________________________________________________________
 // Challenge 5
-/* 
+/*
 Rebuild your map function, this time instead of using a for loop, use your own forEach function that you just defined. 
 Call this new function mapWith.//console.log(mapWith([1, 2, 3], addTwo));
 */
-//console.log(mapWith([1, 2, 3], addTwo)); should output [ 3, 4, 5 ]
+
+type addTwoType = (num: number) => number;
+
+const mapWith = (array: number[], addTwo: addTwoType): number[] => {
+    // Created a new array to store the results
+    const newArr: number[] = [];
+
+    // Using the previous forEach function to loop through the input array
+    // pushing the results to newArr
+    forEach(array, (element: number) => {
+        newArr.push(addTwo(element));
+    });
+
+    //Return the new array
+    return newArr;
+};
+
+console.log(mapWith([1, 2, 3], addTwo));
+//should output [ 3, 4, 5 ]
 
 // ________________________________________________________________________________________________
 // Challenge 6
